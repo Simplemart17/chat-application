@@ -1,14 +1,14 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Typography, Button } from '@material-ui/core'
+import { Grid, Typography, Button } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    height: 89,
-    marginBottom: 35,
+    margin: '45px 0px 70px 0px',
+    [theme.breakpoints.down('sm')]: {
+      margin: 0,
+      paddingTop: 15
+    },
   },
   description: {
     fontSize: 17,
@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 17,
     backgroundColor: '#FFFFFF',
     color: theme.palette.primary.main,
-    padding: "15px 25px",
+    paddingTop: "15px",
+    paddingBottom: "15px",
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
       color: '#FFFFFF',
@@ -33,7 +34,7 @@ const AuthPageHeader = (props) => {
   const { description, buttonName, buttonLink } = props
 
   return (
-    <Box container className={classes.root}>
+    <Grid container alignItems="center" justify="flex-end" className={classes.root}>
       <Typography className={classes.description}>{description}</Typography>
       <Button
         onClick={buttonLink}
@@ -43,7 +44,7 @@ const AuthPageHeader = (props) => {
       >
         {buttonName}
       </Button>
-    </Box>
+    </Grid>
   )
 }
 

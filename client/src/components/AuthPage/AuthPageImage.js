@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import backgroundImage from '../../assets/bg-img.png'
 import chatIcon from '../../assets/bubble.svg'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     backgroundImage: `linear-gradient(to bottom, rgba(58, 141, 255, 0.85), rgba(134, 185, 255, 0.85)), url(${backgroundImage})`,
@@ -21,7 +21,20 @@ const useStyles = makeStyles(() => ({
     color: '#FFFFFF',
     maxWidth: '70%',
     textAlign: 'center',
+    [theme.breakpoints.only('md')]: {
+      fontSize: 25,
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 25,
+      fontWeight: "bold",
+      marginBottom: 15
+    },
   },
+  chatIcon: {
+    [theme.breakpoints.down('md')]: {
+      marginTop: 15
+    },
+  }
 }))
 
 const AuthPageImage = () => {
@@ -29,7 +42,7 @@ const AuthPageImage = () => {
 
   return (
     <Grid item xs className={classes.root}>
-      <Box>
+      <Box className={classes.chatIcon}>
         <img src={chatIcon} alt="chat icon" />
       </Box>
       <Typography className={classes.description}>

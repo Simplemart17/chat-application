@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Grid, CssBaseline } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { register } from './store/utils/thunkCreators'
 import { AuthPageImage, SignUpPageDetails } from './components/AuthPage'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block'
+    },
   },
 }))
 
@@ -46,7 +49,6 @@ const Login = (props) => {
 
   return (
     <Grid container className={classes.root}>
-      <CssBaseline />
       <AuthPageImage />
       <SignUpPageDetails
         handleRegister={handleRegister}

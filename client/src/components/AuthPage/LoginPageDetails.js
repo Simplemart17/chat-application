@@ -13,11 +13,17 @@ import { AuthPageHeader } from './index'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
     backgroundColor: '#FFFFFF',
     paddingLeft: 100,
     paddingRight: 100,
+    [theme.breakpoints.only('md')]: {
+      paddingLeft: 15,
+      paddingRight: 15,
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: 20,
+      paddingRight: 20,
+    },
   },
   title: {
     fontSize: 30,
@@ -27,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formContainer: {
     marginBottom: 50,
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: 20,
+    },
   },
   button: {
     display: 'flex',
