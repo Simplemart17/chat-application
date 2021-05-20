@@ -31,6 +31,9 @@ const useStyles = makeStyles(() => ({
     opacity: 0.5,
     cursor: 'pointer',
   },
+  paper: {
+    marginTop: 30,
+  }
 }))
 
 const CurrentUser = (props) => {
@@ -62,7 +65,7 @@ const CurrentUser = (props) => {
           keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
-          style={{ top: 30, left: -30 }}
+          classes={{ paper: classes.paper }}
         >
           <MenuItem onClick={props.handleLogout}>Logout</MenuItem>
         </Menu>
