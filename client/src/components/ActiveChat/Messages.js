@@ -6,9 +6,19 @@ import moment from "moment";
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
 
+  // reorder the message to make chat conversation easily followed
+  const sortMessage = (messg) => [...messg].sort((a, b) => {
+    if (a.createdAt < b.createdAt) {
+      return -1
+    } else if (a.createdAt > b.createdAt) {
+      return 1
+    }
+    return 0
+  })
+
   return (
     <Box>
-      {messages.map((message) => {
+      {sortMessage(messages).map((message) => {
         const time = moment(message.createdAt).format("h:mm");
 
         return message.senderId === userId ? (
