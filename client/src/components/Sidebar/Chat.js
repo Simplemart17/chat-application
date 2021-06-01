@@ -2,9 +2,6 @@ import React from 'react';
 import { Box, Badge } from '@material-ui/core';
 import { BadgeAvatar, ChatContent } from '../Sidebar';
 import { withStyles } from '@material-ui/core/styles';
-import { setActiveChat } from '../../store/activeConversation';
-import { connect } from 'react-redux';
-import { readMessages } from "../../store/utils/thunkCreators";
 
 const styles = {
   root: {
@@ -24,21 +21,14 @@ const styles = {
 }
 
 const Chat = (props) => {
-  const { setActiveChat, readMessage, classes, conversation, activeConvo, user } = props;
-  
+  const { setActiveChat, readMessage, classes, conversation, activeConvo, unreadMsg } = props;
+  const { otherUser, unread } = conversation;
   
   const handleClick = async (conversation, body) => {
     await setActiveChat(conversation.otherUser.username);
-    await readMessage(body);
+    unreadMsg.length && await readMessage(body);
   }
 
-  const { otherUser, messages } = conversation;
-  const { id } = user;
-
-  // Get the id of unread messages
-  const unreadMsg = messages
-    .filter((data) => data.senderId !== id && data.status === false)
-    .map((x) => x.id);
 
   return (
     <Box
@@ -54,22 +44,14 @@ const Chat = (props) => {
       <ChatContent conversation={conversation} />
       {!activeConvo && (
         <Box className={classes.chatCount}>
-          <Badge badgeContent={unreadMsg.length} color="primary" />
+          <Badge
+            badgeContent={unread}
+            color="primary"
+          />
         </Box>
       )}
     </Box>
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setActiveChat: (id) => {
-      dispatch(setActiveChat(id));
-    },
-    readMessage: (body) => {
-      dispatch(readMessages(body));
-    }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Chat));
+export default withStyles(styles)(Chat);
