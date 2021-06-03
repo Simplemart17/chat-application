@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Typography, Menu, MenuItem } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { connect } from 'react-redux'
 import { BadgeAvatar } from './index'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
@@ -40,8 +39,6 @@ const CurrentUser = (props) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
 
-  const user = props.user || {}
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
@@ -52,9 +49,9 @@ const CurrentUser = (props) => {
 
   return (
     <Box className={classes.root}>
-      <BadgeAvatar photoUrl={user.photoUrl} online={true} />
+      <BadgeAvatar photoUrl={props.user.photoUrl} online={true} />
       <Box className={classes.subContainer}>
-        <Typography className={classes.username}>{user.username}</Typography>
+        <Typography className={classes.username}>{props.user.username}</Typography>
         <MoreHorizIcon
           classes={{ root: classes.ellipsis }}
           onClick={handleClick}
@@ -74,10 +71,4 @@ const CurrentUser = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  }
-}
-
-export default connect(mapStateToProps)(CurrentUser)
+export default CurrentUser

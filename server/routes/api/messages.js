@@ -43,4 +43,23 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/", async (req, res, next) => {
+  try {
+    if (!req.user) {
+      return res.sendStatus(401);
+    }
+
+    const [, dataValues] = await Message.update(
+      { status: true},
+      { where: { id: req.body },
+      returning: true
+    });
+
+    res.json(dataValues)
+    
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
