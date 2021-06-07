@@ -1,4 +1,4 @@
-# Messenger
+# Chat Application
 
 A one-to-one realtime chat app.
 
